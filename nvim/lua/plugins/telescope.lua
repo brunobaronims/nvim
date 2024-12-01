@@ -15,7 +15,7 @@ return {
 					return vim.fn.expand("%:p:h")
 				end
 				telescope.extensions.file_browser.file_browser({
-					path = "%:p:h",
+					path = telescope_buffer_dir(),
 					cwd = telescope_buffer_dir(),
 					respect_gitignore = false,
 					hidden = true,
@@ -24,6 +24,107 @@ return {
 					initial_mode = "normal",
 					layout_config = { height = 40 },
 				})
+			end,
+			desc = "File Browser",
+		},
+		{
+			"<leader><leader>",
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.find_files({
+					prompt_title = "Search Root",
+					hidden = true,
+					no_ignore_parent = true,
+					cwd = "/",
+					find_command = { "fdfind", "--type", "f", "--no-ignore", "--exclude", "mnt" },
+				})
+			end,
+			desc = "Find Files",
+		},
+		{
+			"<leader>ff",
+			function()
+				local builtin = require("telescope.builtin")
+				local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+
+				if git_root and vim.fn.isdirectory(git_root) ~= 0 then
+					builtin.find_files({
+						cwd = git_root,
+						prompt_title = "Search Git Root",
+						no_ignore = true,
+						no_ignore_parent = true,
+						hidden = true,
+					})
+				else
+					builtin.find_files({
+						prompt_title = "Search Current Dir",
+						no_ignore = true,
+						no_ignore_parent = true,
+						hidden = true,
+					})
+				end
+			end,
+			desc = "Find Files",
+		},
+		{
+			"<leader>/",
+			function()
+				local builtin = require("telescope.builtin")
+
+				builtin.live_grep({
+					cwd = "/",
+					file_ignore_patterns = { "^mnt/" },
+					vimgrep_arguments = {
+						"rg",
+						"--color=never",
+						"--no-heading",
+						"--with-filename",
+						"--line-number",
+						"--column",
+						"--smart-case",
+						"-uu",
+					},
+					prompt_title = "Root Grep",
+				})
+			end,
+		},
+		{
+			"<leader>.",
+			function()
+				local builtin = require("telescope.builtin")
+
+				local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+
+				if git_root and vim.fn.isdirectory(git_root) ~= 0 then
+					builtin.live_grep({
+						cwd = git_root,
+						vimgrep_arguments = {
+							"rg",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+							"-uu",
+						},
+						prompt_title = "Grep Git Root",
+					})
+				else
+					builtin.live_grep({
+						vimgrep_arguments = {
+							"rg",
+							"--color=never",
+							"--no-heading",
+							"--with-filename",
+							"--line-number",
+							"--column",
+							"--smart-case",
+							"-uu",
+						},
+						prompt_title = "Grep Current Dir",
+					})
+				end
 			end,
 		},
 	},
