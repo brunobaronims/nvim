@@ -1,6 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
+	priority = 1000,
 	opts = {
 		ensure_installed = {
 			"c",
@@ -22,4 +23,7 @@ return {
 		ignore_install = {},
 		auto_install = true,
 	},
+	config = function(_, opts)
+		require("nvim-treesitter.configs").setup(opts)
+	end,
 }

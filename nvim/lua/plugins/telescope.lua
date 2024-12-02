@@ -28,7 +28,7 @@ return {
 			desc = "File Browser",
 		},
 		{
-			"<leader><leader>",
+			"<leader>ff",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.find_files({
@@ -42,7 +42,7 @@ return {
 			desc = "Find Files",
 		},
 		{
-			"<leader>ff",
+			"<leader><leader>",
 			function()
 				local builtin = require("telescope.builtin")
 				local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
@@ -68,28 +68,6 @@ return {
 		},
 		{
 			"<leader>/",
-			function()
-				local builtin = require("telescope.builtin")
-
-				builtin.live_grep({
-					cwd = "/",
-					file_ignore_patterns = { "^mnt/" },
-					vimgrep_arguments = {
-						"rg",
-						"--color=never",
-						"--no-heading",
-						"--with-filename",
-						"--line-number",
-						"--column",
-						"--smart-case",
-						"-uu",
-					},
-					prompt_title = "Root Grep",
-				})
-			end,
-		},
-		{
-			"<leader>.",
 			function()
 				local builtin = require("telescope.builtin")
 
