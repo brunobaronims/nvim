@@ -7,6 +7,12 @@ return {
 		ensure_installed = {
 			"stylua",
 			"shfmt",
+			"gopls",
+			"gofumpt",
+			"html",
+			"prettier",
+			"biome",
+			"tailwindcss-language-server",
 		},
-	}
+	},
 }

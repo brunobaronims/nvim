@@ -12,6 +12,9 @@ return {
 	config = function(_, opts)
 		local lspconfig = require("lspconfig")
 
+		require("mason").setup()
+		require("mason-lspconfig").setup()
+
 		require("mason-lspconfig").setup_handlers({
 			function(server_name)
 				if opts.servers and opts.servers[server_name] then
