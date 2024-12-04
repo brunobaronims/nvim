@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-fzf-native.nvim",
-		"nvim-telescope/telescope-file-browser.nvim",
+		{ "nvim-telescope/telescope-file-browser.nvim", config = function() end },
 	},
 	keys = {
 		{
@@ -45,7 +45,10 @@ return {
 			"<leader><leader>",
 			function()
 				local builtin = require("telescope.builtin")
-				local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+
+				local buffer_dir = vim.fn.expand("%:p:h")
+
+				local git_root = vim.fn.systemlist("git -C " .. buffer_dir .. " rev-parse --show-toplevel")[1]
 
 				if git_root and vim.fn.isdirectory(git_root) ~= 0 then
 					builtin.find_files({
@@ -57,6 +60,7 @@ return {
 					})
 				else
 					builtin.find_files({
+						cwd = buffer_dir,
 						prompt_title = "Search Current Dir",
 						no_ignore = true,
 						no_ignore_parent = true,
@@ -71,7 +75,9 @@ return {
 			function()
 				local builtin = require("telescope.builtin")
 
-				local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+				local buffer_dir = vim.fn.expand("%:p:h")
+
+				local git_root = vim.fn.systemlist("git -C " .. buffer_dir .. " rev-parse --show-toplevel")[1]
 
 				if git_root and vim.fn.isdirectory(git_root) ~= 0 then
 					builtin.live_grep({
@@ -90,6 +96,7 @@ return {
 					})
 				else
 					builtin.live_grep({
+						cwd = buffer_dir,
 						vimgrep_arguments = {
 							"rg",
 							"--color=never",
@@ -108,7 +115,7 @@ return {
 	},
 	config = function(_, opts)
 		local telescope = require("telescope")
-		local actions = telescope.actions
+		local actions = require("telescope.actions")
 		local fb_actions = telescope.extensions.file_browser.actions
 
 		opts.extensions = {
