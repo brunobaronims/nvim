@@ -28,6 +28,18 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.wo.number = true
 
+vim.filetype.add({
+	extension = {
+		env = "dotenv",
+	},
+	filename = {
+		[".env"] = "dotenv",
+	},
+	pattern = {
+		["%.env%.[%w_.-]+"] = "dotenv",
+	},
+})
+
 require("config.keymaps")
 require("config.autocmds")
 

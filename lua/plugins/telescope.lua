@@ -36,7 +36,7 @@ return {
 					hidden = true,
 					no_ignore_parent = true,
 					cwd = "/",
-					find_command = { "fdfind", "--type", "f", "--no-ignore", "--exclude", "mnt" },
+					find_command = { "fd", "--type", "f", "--no-ignore", "--exclude", "mnt" },
 				})
 			end,
 			desc = "Find Files",
