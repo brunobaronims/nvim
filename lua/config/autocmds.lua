@@ -83,11 +83,3 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
-
--- HACK: don't understand why html files are being interpreted as htmlangular sometimes
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = { "*.html" },
-	callback = function()
-		vim.bo.filetype = "html"
-	end,
-})

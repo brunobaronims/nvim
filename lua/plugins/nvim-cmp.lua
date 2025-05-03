@@ -31,6 +31,7 @@ return {
 				{ name = "luasnip" },
 				{ name = "path" },
 				{ name = "nvim_lsp" },
+				{ name = "lazydev" },
 			}, {
 				{ name = "buffer" },
 			}),

@@ -7,5 +7,7 @@ return {
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
 		bufdelete = { enabled = true },
+		lazygit = { enabled = true },
+		terminal = { enabled = true},
 	},
 }
