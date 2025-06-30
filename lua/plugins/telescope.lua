@@ -35,7 +35,7 @@ return {
                     prompt_title = "Search Root",
                     hidden = true,
                     cwd = "/",
-                    find_command = { "fd", "--type", "f", "--no-ignore", "--exclude", "mnt", "--exclude", "node_modules", "--exclude", ".git" },
+                    find_command = { "fd", "--type", "f", "--no-ignore", "--exclude", "mnt", "--exclude", "**/node_modules", "--exclude", "**/.git" },
                 })
             end,
             desc = "Find Files",
@@ -56,8 +56,8 @@ return {
                         hidden = true,
                         find_command = {
                             "fd", "--type", "f", "--no-ignore",
-                            "--exclude", "node_modules",
-                            "--exclude", ".git",
+                            "--exclude", "**/node_modules",
+                            "--exclude", "**/.git",
                         },
                     })
                 else
@@ -67,8 +67,8 @@ return {
                         hidden = true,
                         find_command = {
                             "fd", "--type", "f", "--no-ignore",
-                            "--exclude", "node_modules",
-                            "--exclude", ".git",
+                            "--exclude", "**/node_modules",
+                            "--exclude", "**/.git",
                         },
                     })
                 end
@@ -97,8 +97,8 @@ return {
                             "--smart-case",
                             "-uu",
                             "--glob",
-                            "!node_modules/**",
-                            "--glob", "!.git/**",
+                            "!**/node_modules/**",
+                            "--glob", "!**/.git/**",
                         },
                         prompt_title = "Grep Git Root",
                     })
@@ -115,8 +115,8 @@ return {
                             "--smart-case",
                             "-uu",
                             "--glob",
-                            "!node_modules/**",
-                            "--glob", "!.git/**",
+                            "!**/node_modules/**",
+                            "--glob", "!**/.git/**",
                         },
                         prompt_title = "Grep Current Dir",
                     })
