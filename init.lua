@@ -31,8 +31,6 @@ local plugins = {
     { src = "https://github.com/nvim-lua/plenary.nvim",          name = "plenary" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons",    name = "devicons" },
     { src = "https://github.com/akinsho/bufferline.nvim",        name = "bufferline" },
-    -- { src = "https://github.com/nvim-telescope/telescope-file-browser.nvim", name = "telescope-fb",    version = "master" },
-    -- { src = "https://github.com/nvim-telescope/telescope.nvim",              name = "telescope",       version = "master" },
     { src = "https://github.com/folke/snacks.nvim",              name = "snacks",          version = "main" },
     --{ src = "https://github.com/nvim-treesitter/nvim-treesitter",            version = "main" },
 }
@@ -86,6 +84,7 @@ if not snacks.did_setup then
         explorer = {},
         bufdelete = {},
         lazygit = {},
+        terminal = {},
     })
 end
 -- require "nvim-treesitter.install".update({ with_sync = true })()
@@ -102,4 +101,3 @@ vim.cmd("colorscheme moonfly")
 
 require('autocmds')
 require('keymaps')
--- require('plugins.telescope')

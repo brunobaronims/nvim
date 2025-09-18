@@ -39,5 +39,8 @@ end, { desc = "Delete Other Buffers" })
 keymap.set("n", "<leader>gg", function()
     Snacks.lazygit()
 end, { desc = "Lazygit" })
+keymap.set("n", "<leader>t", function()
+    Snacks.terminal()
+end, { desc = "Lazygit" })
 
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
