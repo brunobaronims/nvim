@@ -72,14 +72,28 @@ require "bufferline".setup()
 require "nvim-web-devicons".setup()
 local snacks = require("snacks")
 if not snacks.did_setup then
+    local function buffer_dir()
+        local name = vim.api.nvim_buf_get_name(0)
+        if name == "" then
+            return vim.uv.cwd()
+        end
+        return vim.fs.dirname(vim.fn.fnamemodify(name, ":p"))
+    end
+
     snacks.setup({
         picker = {
             hidden = true,
+            config = function(opts)
+                if not opts.cwd then
+                    opts.cwd = buffer_dir()
+                end
+                return opts
+            end,
             sources = {
                 explorer = {
                     auto_close = true,
-                }
-            }
+                },
+            },
         },
         explorer = {},
         bufdelete = {},
