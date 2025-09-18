@@ -9,6 +9,7 @@ vim.o.winborder = "rounded"
 vim.o.expandtab = true
 vim.o.cmdheight = 0
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 vim.diagnostic.config({ virtual_text = true })
 
 vim.filetype.add({
@@ -30,8 +31,10 @@ local plugins = {
     { src = "https://github.com/mason-org/mason-lspconfig.nvim",  name = "mason-lspconfig", version = "main" },
     { src = "https://github.com/nvim-lua/plenary.nvim",           name = "plenary" },
     { src = "https://github.com/nvim-tree/nvim-web-devicons",     name = "devicons" },
+    { src = "https://github.com/echasnovski/mini.surround",       name = "surround" },
     { src = "https://github.com/akinsho/bufferline.nvim",         name = "bufferline" },
     { src = "https://github.com/folke/snacks.nvim",               name = "snacks",          version = "main" },
+    { src = "https://github.com/MagicDuck/grug-far.nvim",         name = "grug",            version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter",      version = "main" },
 }
 
@@ -68,7 +71,19 @@ require "mason-lspconfig".setup({
         "ts_ls",
     }
 })
+require "mini.surround".setup({
+    mappings = {
+        add = "gsa",
+        delete = "gsd",
+        find = "gsf",
+        find_left = "gsF",
+        highlight = "gsh",
+        replace = "gsr",
+        update_n_lines = "gsn",
+    },
+})
 require "bufferline".setup()
+require "grug-far".setup()
 require "nvim-web-devicons".setup()
 local snacks = require("snacks")
 if not snacks.did_setup then
@@ -95,10 +110,23 @@ if not snacks.did_setup then
                 },
             },
         },
+        scroll = {
+            enabled = true,
+            animate = {
+                duration = { step = 10, total = 100 },
+                easing = "linear",
+            },
+            animate_repeat = {
+                delay = 50,
+                duration = { step = 3, total = 20 },
+                easing = "linear",
+            },
+        },
         explorer = {},
         bufdelete = {},
         lazygit = {},
         terminal = {},
+        indent = {},
     })
 end
 require "nvim-treesitter".install {
