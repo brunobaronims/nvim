@@ -23,20 +23,41 @@ vim.filetype.add({
     },
 })
 
-vim.pack.add({
-    { src = "https://github.com/bluz71/vim-moonfly-colors",                  name = "moonfly" },
-    { src = 'https://github.com/neovim/nvim-lspconfig',                      version = "master" },
-    { src = "https://github.com/mason-org/mason.nvim",                       version = "main" },
-    { src = "https://github.com/mason-org/mason-lspconfig.nvim",             version = "main" },
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/nvim-tree/nvim-web-devicons" },
-    { src = "https://github.com/akinsho/bufferline.nvim" },
-    { src = "https://github.com/nvim-telescope/telescope-file-browser.nvim", version = "master" },
-    { src = "https://github.com/nvim-telescope/telescope.nvim",              version = "master" },
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter",            version = "main" },
-})
+local plugins = {
+    { src = "https://github.com/bluz71/vim-moonfly-colors",      name = "moonfly" },
+    { src = "https://github.com/neovim/nvim-lspconfig",          name = "lspconfig",       version = "master" },
+    { src = "https://github.com/mason-org/mason.nvim",           name = "mason",           version = "main" },
+    { src = "https://github.com/mason-org/mason-lspconfig.nvim", name = "mason-lspconfig", version = "main" },
+    { src = "https://github.com/nvim-lua/plenary.nvim",          name = "plenary" },
+    { src = "https://github.com/nvim-tree/nvim-web-devicons",    name = "devicons" },
+    { src = "https://github.com/akinsho/bufferline.nvim",        name = "bufferline" },
+    -- { src = "https://github.com/nvim-telescope/telescope-file-browser.nvim", name = "telescope-fb",    version = "master" },
+    -- { src = "https://github.com/nvim-telescope/telescope.nvim",              name = "telescope",       version = "master" },
+    { src = "https://github.com/folke/snacks.nvim",              name = "snacks",          version = "main" },
+    --{ src = "https://github.com/nvim-treesitter/nvim-treesitter",            version = "main" },
+}
 
-vim.pack.update()
+vim.pack.add(plugins)
+
+local managed = {}
+for _, spec in ipairs(plugins) do
+    local name = spec.name
+    if name then
+        managed[name] = true
+    end
+end
+
+local stale = {}
+for _, plug in ipairs(vim.pack.get()) do
+    local name = plug.spec.name
+    if name and not managed[name] then
+        table.insert(stale, name)
+    end
+end
+
+if #stale > 0 then
+    vim.pack.del(stale)
+end
 
 require "mason".setup()
 require "mason-lspconfig".setup({
@@ -51,7 +72,23 @@ require "mason-lspconfig".setup({
 })
 require "bufferline".setup()
 require "nvim-web-devicons".setup()
-require "nvim-treesitter.install".update({ with_sync = true })()
+local snacks = require("snacks")
+if not snacks.did_setup then
+    snacks.setup({
+        picker = {
+            hidden = true,
+            sources = {
+                explorer = {
+                    auto_close = true,
+                }
+            }
+        },
+        explorer = {},
+        bufdelete = {},
+        lazygit = {},
+    })
+end
+-- require "nvim-treesitter.install".update({ with_sync = true })()
 
 vim.lsp.config('lua_ls', {
     settings = {
@@ -65,4 +102,4 @@ vim.cmd("colorscheme moonfly")
 
 require('autocmds')
 require('keymaps')
-require('plugins.telescope')
+-- require('plugins.telescope')
