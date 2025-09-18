@@ -24,15 +24,15 @@ vim.filetype.add({
 })
 
 local plugins = {
-    { src = "https://github.com/bluz71/vim-moonfly-colors",      name = "moonfly" },
-    { src = "https://github.com/neovim/nvim-lspconfig",          name = "lspconfig",       version = "master" },
-    { src = "https://github.com/mason-org/mason.nvim",           name = "mason",           version = "main" },
-    { src = "https://github.com/mason-org/mason-lspconfig.nvim", name = "mason-lspconfig", version = "main" },
-    { src = "https://github.com/nvim-lua/plenary.nvim",          name = "plenary" },
-    { src = "https://github.com/nvim-tree/nvim-web-devicons",    name = "devicons" },
-    { src = "https://github.com/akinsho/bufferline.nvim",        name = "bufferline" },
-    { src = "https://github.com/folke/snacks.nvim",              name = "snacks",          version = "main" },
-    --{ src = "https://github.com/nvim-treesitter/nvim-treesitter",            version = "main" },
+    { src = "https://github.com/bluz71/vim-moonfly-colors",       name = "moonfly" },
+    { src = "https://github.com/neovim/nvim-lspconfig",           name = "lspconfig",       version = "master" },
+    { src = "https://github.com/mason-org/mason.nvim",            name = "mason",           version = "main" },
+    { src = "https://github.com/mason-org/mason-lspconfig.nvim",  name = "mason-lspconfig", version = "main" },
+    { src = "https://github.com/nvim-lua/plenary.nvim",           name = "plenary" },
+    { src = "https://github.com/nvim-tree/nvim-web-devicons",     name = "devicons" },
+    { src = "https://github.com/akinsho/bufferline.nvim",         name = "bufferline" },
+    { src = "https://github.com/folke/snacks.nvim",               name = "snacks",          version = "main" },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter",      version = "main" },
 }
 
 vim.pack.add(plugins)
@@ -87,7 +87,23 @@ if not snacks.did_setup then
         terminal = {},
     })
 end
--- require "nvim-treesitter.install".update({ with_sync = true })()
+require "nvim-treesitter".install {
+    "c",
+    "lua",
+    "vim",
+    "vimdoc",
+    "javascript",
+    "jsx",
+    "tsx",
+    "typescript",
+    "html",
+    "go",
+    "regex",
+    "bash",
+    "markdown",
+    "markdown_inline",
+    "zig",
+}
 
 vim.lsp.config('lua_ls', {
     settings = {
