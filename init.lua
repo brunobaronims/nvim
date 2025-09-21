@@ -36,6 +36,7 @@ local plugins = {
     { src = "https://github.com/folke/snacks.nvim",               name = "snacks",          version = "main" },
     { src = "https://github.com/MagicDuck/grug-far.nvim",         name = "grug",            version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter",      version = "main" },
+    { src = "https://github.com/nvim-mini/mini.pairs",            name = "pairs",           version = "main" },
 }
 
 vim.pack.add(plugins)
@@ -129,7 +130,10 @@ if not snacks.did_setup then
         indent = {},
     })
 end
-require "nvim-treesitter".install {
+require 'nvim-treesitter'.setup {
+    install_dir = vim.fn.stdpath('data') .. '/parser'
+}
+require "nvim-treesitter".install({
     "c",
     "lua",
     "vim",
@@ -145,7 +149,8 @@ require "nvim-treesitter".install {
     "markdown",
     "markdown_inline",
     "zig",
-}
+}):wait(30000)
+require "mini.pairs".setup()
 
 vim.lsp.config('lua_ls', {
     settings = {
