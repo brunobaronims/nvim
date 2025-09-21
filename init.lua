@@ -37,6 +37,8 @@ local plugins = {
     { src = "https://github.com/MagicDuck/grug-far.nvim",         name = "grug",            version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter",      version = "main" },
     { src = "https://github.com/nvim-mini/mini.pairs",            name = "pairs",           version = "main" },
+    { src = "https://github.com/nvim-lualine/lualine.nvim",       name = "lualine",         version = "master" },
+    { src = "https://github.com/saghen/blink.cmp",                name = "blink.cmp",       version = "v1.7.0" },
 }
 
 vim.pack.add(plugins)
@@ -86,6 +88,7 @@ require "mini.surround".setup({
 require "bufferline".setup()
 require "grug-far".setup()
 require "nvim-web-devicons".setup()
+require "lualine".setup({})
 local snacks = require("snacks")
 if not snacks.did_setup then
     local function buffer_dir()
@@ -128,6 +131,7 @@ if not snacks.did_setup then
         lazygit = {},
         terminal = {},
         indent = {},
+        notifier = {},
     })
 end
 require 'nvim-treesitter'.setup {
@@ -151,6 +155,31 @@ require "nvim-treesitter".install({
     "zig",
 }):wait(30000)
 require "mini.pairs".setup()
+require "blink.cmp".setup({
+    keymap = { preset = 'default' },
+    appearance = {
+        nerd_font_variant = 'mono'
+    },
+    cmdline = {
+        enabled = true,
+        completion = {
+            menu = {
+                auto_show = true
+            },
+        }
+    },
+    completion = {
+        documentation = {
+            auto_show = true
+        },
+
+        ghost_text = { enabled = true }
+    },
+    sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'cmdline' },
+    },
+    fuzzy = { implementation = "prefer_rust_with_warning" }
+})
 
 vim.lsp.config('lua_ls', {
     settings = {
@@ -164,3 +193,5 @@ vim.cmd("colorscheme moonfly")
 
 require('autocmds')
 require('keymaps')
+
+vim.cmd [[set completeopt+=menu,menuone,noinsert,noselect]]

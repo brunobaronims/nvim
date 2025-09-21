@@ -35,6 +35,7 @@ keymap.set("n", "<leader>bo", function() Snacks.bufdelete.other() end, { desc = 
 keymap.set("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit" })
 keymap.set("n", "<leader>t", function() Snacks.terminal() end, { desc = "Lazygit" })
 keymap.set("n", "<leader><leader>", function() Snacks.picker.smart() end, { desc = "Smart File Finder" })
+keymap.set("n", "sh", function() Snacks.notifier.show_history({}) end, { desc = "Show Notifier History" })
 keymap.set("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
 keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "File Finder" })
 keymap.set("n", "<leader>sr", ":GrugFar<Return>", { desc = "Grug" })
