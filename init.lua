@@ -156,7 +156,10 @@ require "nvim-treesitter".install({
 }):wait(30000)
 require "mini.pairs".setup()
 require "blink.cmp".setup({
-    keymap = { preset = 'default' },
+    keymap = {
+        preset = 'default',
+        ['<CR>'] = { 'accept', 'fallback' }
+    },
     appearance = {
         nerd_font_variant = 'mono'
     },
