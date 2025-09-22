@@ -34,6 +34,7 @@ local plugins = {
     { src = "https://github.com/echasnovski/mini.surround",       name = "surround" },
     { src = "https://github.com/akinsho/bufferline.nvim",         name = "bufferline" },
     { src = "https://github.com/folke/snacks.nvim",               name = "snacks",          version = "main" },
+    { src = "https://github.com/folke/trouble.nvim",              name = "trouble",         version = "main" },
     { src = "https://github.com/MagicDuck/grug-far.nvim",         name = "grug",            version = "main" },
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter",      version = "main" },
     { src = "https://github.com/nvim-mini/mini.pairs",            name = "pairs",           version = "main" },
@@ -169,13 +170,12 @@ require "blink.cmp".setup({
             menu = {
                 auto_show = true
             },
-        }
+        },
     },
     completion = {
         documentation = {
             auto_show = true
         },
-
         ghost_text = { enabled = true }
     },
     sources = {
@@ -183,6 +183,7 @@ require "blink.cmp".setup({
     },
     fuzzy = { implementation = "prefer_rust_with_warning" }
 })
+require "trouble".setup()
 
 vim.lsp.config('lua_ls', {
     settings = {
@@ -196,5 +197,3 @@ vim.cmd("colorscheme moonfly")
 
 require('autocmds')
 require('keymaps')
-
-vim.cmd [[set completeopt+=menu,menuone,noinsert,noselect]]

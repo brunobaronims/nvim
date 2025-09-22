@@ -29,6 +29,7 @@ keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Delete Other Windows" })
 
 keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Previous Buffer" })
+
 keymap.set("n", "sf", function() Snacks.explorer() end, { desc = "File Explorer" })
 keymap.set("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
 keymap.set("n", "<leader>bo", function() Snacks.bufdelete.other() end, { desc = "Delete Other Buffers" })
@@ -38,6 +39,11 @@ keymap.set("n", "<leader><leader>", function() Snacks.picker.smart() end, { desc
 keymap.set("n", "sh", function() Snacks.notifier.show_history({}) end, { desc = "Show Notifier History" })
 keymap.set("n", "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" })
 keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "File Finder" })
+
+keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+keymap.set("n", "<leader>xb", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+keymap.set("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+
 keymap.set("n", "<leader>sr", ":GrugFar<Return>", { desc = "Grug" })
 
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
