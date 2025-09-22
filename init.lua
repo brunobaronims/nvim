@@ -73,6 +73,7 @@ require "mason-lspconfig".setup({
         "cssls",
         "html",
         "ts_ls",
+        "zls",
     }
 })
 require "mini.surround".setup({
