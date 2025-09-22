@@ -100,9 +100,21 @@ if not snacks.did_setup then
         return vim.fs.dirname(vim.fn.fnamemodify(name, ":p"))
     end
 
+    local e = {
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/.git/**",
+        "**/.cache/**",
+        "**/.venv/**",
+        "**/.next/**",
+        "**/target/**",
+    }
+
     snacks.setup({
         picker = {
             hidden = true,
+            ignored = true,
             config = function(opts)
                 if not opts.cwd then
                     opts.cwd = buffer_dir()
@@ -111,8 +123,23 @@ if not snacks.did_setup then
             end,
             sources = {
                 explorer = {
+                    cmd = "fd",
                     auto_close = true,
+                    follow_file = false,
+                    exclude = e,
+                    matcher = {
+                        cwd_bonus = true,
+                        sort_empty = true,
+                        frecency = true,
+                    },
                 },
+                grep = {
+                    exclude = e,
+                },
+                files = {
+                    cmd = "fd",
+                    exclude = e,
+                }
             },
         },
         scroll = {
@@ -127,7 +154,6 @@ if not snacks.did_setup then
                 easing = "linear",
             },
         },
-        explorer = {},
         bufdelete = {},
         lazygit = {},
         terminal = {},
