@@ -8,6 +8,7 @@ vim.o.termguicolors = true
 vim.o.winborder = "rounded"
 vim.o.expandtab = true
 vim.o.cmdheight = 0
+vim.o.fileformats = { "unix", "dos" }
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.diagnostic.config({ virtual_text = true })
@@ -147,6 +148,7 @@ if not snacks.did_setup then
                         return require("snacks.picker.source.explorer").setup(opts)
                     end,
                     follow_file = false,
+                    auto_close = true,
                     exclude = e,
                 },
                 grep = {
