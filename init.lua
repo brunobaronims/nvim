@@ -101,6 +101,21 @@ if not snacks.did_setup then
         return vim.fs.dirname(vim.fn.fnamemodify(name, ":p"))
     end
 
+    local function project_dir()
+        local dir = buffer_dir()
+        if not dir then
+            return nil
+        end
+        local git_path = vim.fs.find(".git", { path = dir, upward = true })[1]
+        if git_path then
+            local git_parent = vim.fs.dirname(git_path)
+            if git_parent and git_parent ~= "" then
+                return git_parent
+            end
+        end
+        return dir
+    end
+
     local e = {
         "**/node_modules/**",
         "**/dist/**",
@@ -118,7 +133,7 @@ if not snacks.did_setup then
             ignored = true,
             config = function(opts)
                 if not opts.cwd then
-                    opts.cwd = buffer_dir()
+                    opts.cwd = project_dir() or buffer_dir()
                 end
                 return opts
             end,
