@@ -144,16 +144,10 @@ if not snacks.did_setup then
                         if not opts.cwd then
                             opts.cwd = buffer_dir()
                         end
-                        return opts
+                        return require("snacks.picker.source.explorer").setup(opts)
                     end,
-                    auto_close = true,
                     follow_file = false,
                     exclude = e,
-                    matcher = {
-                        cwd_bonus = true,
-                        sort_empty = true,
-                        frecency = true,
-                    },
                 },
                 grep = {
                     exclude = e,
@@ -181,6 +175,7 @@ if not snacks.did_setup then
         terminal = {},
         indent = {},
         notifier = {},
+        explorer = { replace_netrw = true },
     })
 end
 require 'nvim-treesitter'.setup {
