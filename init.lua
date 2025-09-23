@@ -140,6 +140,12 @@ if not snacks.did_setup then
             sources = {
                 explorer = {
                     cmd = "fd",
+                    config = function(opts)
+                        if not opts.cwd then
+                            opts.cwd = buffer_dir()
+                        end
+                        return opts
+                    end,
                     auto_close = true,
                     follow_file = false,
                     exclude = e,
