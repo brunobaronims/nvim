@@ -74,7 +74,7 @@ require "mason-lspconfig".setup({
         "cssls",
         "html",
         "ts_ls",
-        "zls",
+        -- "zls",
     }
 })
 require "mini.surround".setup({
@@ -199,7 +199,7 @@ require "nvim-treesitter".install({
     "markdown",
     "markdown_inline",
     "zig",
-}):wait(30000)
+})
 require "mini.pairs".setup()
 require "blink.cmp".setup({
     keymap = {
@@ -230,6 +230,10 @@ require "blink.cmp".setup({
 })
 require "trouble".setup()
 
+vim.lsp.enable('zls')
+vim.lsp.config('zls', {
+    cmd = { "/usr/local/zig/zls" }
+})
 vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
