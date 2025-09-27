@@ -185,6 +185,7 @@ require 'nvim-treesitter'.setup {
 }
 require "nvim-treesitter".install({
     "c",
+    "cpp",
     "lua",
     "vim",
     "vimdoc",
