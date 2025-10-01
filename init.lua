@@ -41,6 +41,7 @@ local plugins = {
     { src = "https://github.com/nvim-mini/mini.pairs",            name = "pairs",           version = "main" },
     { src = "https://github.com/nvim-lualine/lualine.nvim",       name = "lualine",         version = "master" },
     { src = "https://github.com/saghen/blink.cmp",                name = "blink.cmp",       version = "v1.7.0" },
+    { src = "https://github.com/windwp/nvim-ts-autotag",          name = "nvim-ts-autotag", version = "main" },
 }
 
 vim.pack.add(plugins)
@@ -230,6 +231,7 @@ require "blink.cmp".setup({
     fuzzy = { implementation = "prefer_rust_with_warning" }
 })
 require "trouble".setup()
+require "nvim-ts-autotag".setup()
 
 vim.lsp.enable('zls')
 vim.lsp.config('zls', {
