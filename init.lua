@@ -26,7 +26,7 @@ vim.filetype.add({
 })
 
 local plugins = {
-	{ src = "https://github.com/bluz71/vim-moonfly-colors", name = "moonfly" },
+	{ src = "https://github.com/ribru17/bamboo.nvim", name = "bamboo", version = "master" },
 	{ src = "https://github.com/neovim/nvim-lspconfig", name = "lspconfig", version = "master" },
 	{ src = "https://github.com/mason-org/mason.nvim", name = "mason", version = "main" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim", name = "mason-lspconfig", version = "main" },
@@ -255,7 +255,9 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
-vim.cmd("colorscheme moonfly")
+require("bamboo").setup()
+require("bamboo").load()
+-- vim.cmd("colorscheme moonfly")
 
 require("autocmds")
 require("keymaps")
