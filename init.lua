@@ -26,7 +26,7 @@ vim.filetype.add({
 })
 
 local plugins = {
-	{ src = "https://github.com/ribru17/bamboo.nvim", name = "bamboo", version = "master" },
+	{ src = "https://github.com/rebelot/kanagawa.nvim", name = "kanagawa", version = "master" },
 	{ src = "https://github.com/neovim/nvim-lspconfig", name = "lspconfig", version = "master" },
 	{ src = "https://github.com/mason-org/mason.nvim", name = "mason", version = "main" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim", name = "mason-lspconfig", version = "main" },
@@ -255,9 +255,16 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
-require("bamboo").setup()
-require("bamboo").load()
--- vim.cmd("colorscheme moonfly")
+vim.cmd("colorscheme kanagawa-dragon")
+
+do
+	local colors = require("kanagawa.colors").setup()
+	local palette = colors.palette
+	local ui = colors.theme.ui
+	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = palette.dragonBlack3, fg = ui.pmenu.fg })
+	vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { bg = palette.dragonBlack3, fg = palette.dragonBlack5 })
+	vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = palette.dragonBlack4, fg = palette.fujiWhite })
+end
 
 require("autocmds")
 require("keymaps")
