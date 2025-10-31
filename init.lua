@@ -43,6 +43,7 @@ local plugins = {
 	{ src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = "v1.7.0" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag", name = "nvim-ts-autotag", version = "main" },
 	{ src = "https://github.com/stevearc/conform.nvim", name = "conform", version = "master" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim", name = "gitsigns", version = "main" },
 }
 
 vim.pack.add(plugins)
@@ -95,6 +96,7 @@ require("bufferline").setup()
 require("grug-far").setup()
 require("nvim-web-devicons").setup()
 require("lualine").setup({})
+require("gitsigns").setup()
 local snacks = require("snacks")
 if not snacks.did_setup then
 	local function buffer_dir()
