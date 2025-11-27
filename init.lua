@@ -178,7 +178,9 @@ if not snacks.did_setup then
 			},
 		},
 		bufdelete = {},
-		lazygit = {},
+		lazygit = {
+            configure = true,
+        },
 		terminal = {},
 		indent = {},
 		notifier = {},

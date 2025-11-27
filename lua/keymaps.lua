@@ -42,7 +42,12 @@ keymap.set("n", "<leader>bo", function()
 	Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
 keymap.set("n", "<leader>gg", function()
-	Snacks.lazygit()
+	local name = vim.api.nvim_buf_get_name(0)
+	local dir = name ~= "" and vim.fs.dirname(name) or vim.uv.cwd()
+	local git_root = vim.fs.find(".git", { path = dir, upward = true })[1]
+	local cwd = git_root and vim.fs.dirname(git_root) or dir
+
+	Snacks.lazygit({ cwd = cwd })
 end, { desc = "Lazygit" })
 keymap.set("n", "<leader>t", function()
 	Snacks.terminal()
