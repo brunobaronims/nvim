@@ -8,6 +8,7 @@ vim.o.termguicolors = true
 vim.o.winborder = "rounded"
 vim.o.expandtab = true
 vim.o.cmdheight = 0
+vim.o.guicursor = "a:block"
 vim.opt.fileformats = { "unix", "dos" }
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
@@ -40,7 +41,7 @@ local plugins = {
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter", version = "main" },
 	{ src = "https://github.com/nvim-mini/mini.pairs", name = "pairs", version = "main" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim", name = "lualine", version = "master" },
-	{ src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = "v1.7.0" },
+	{ src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = "v1.8.0" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag", name = "nvim-ts-autotag", version = "main" },
 	{ src = "https://github.com/stevearc/conform.nvim", name = "conform", version = "master" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim", name = "gitsigns", version = "main" },
@@ -207,6 +208,7 @@ require("nvim-treesitter").install({
 	"markdown",
 	"markdown_inline",
 	"zig",
+    "graphql",
 })
 require("mini.pairs").setup()
 require("blink.cmp").setup({
