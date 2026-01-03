@@ -209,6 +209,7 @@ require("nvim-treesitter").install({
 	"markdown_inline",
 	"zig",
     "graphql",
+    "dockerfile",
 })
 require("mini.pairs").setup()
 require("blink.cmp").setup({
@@ -244,7 +245,9 @@ require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua", lsp_format = "fallback" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		go = { "goimports", lsp_format = "fallback" },
 	},
 })

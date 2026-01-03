@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"lua",
 		"go",
 		"c",
+        "cpp",
 		"vim",
 		"vimdoc",
 		"javascript",
@@ -20,6 +21,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		"bash",
 		"markdown",
 		"markdown_inline",
+        "graphql",
+        "dockerfile",
 	},
 	callback = function()
 		vim.treesitter.start()
