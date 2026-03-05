@@ -23,6 +23,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		"markdown_inline",
         "graphql",
         "dockerfile",
+        "prisma",
+        "slang",
 	},
 	callback = function()
 		vim.treesitter.start()
@@ -43,7 +45,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo[event.buf].buflisted = false
 		vim.schedule(function()
 			vim.keymap.set("n", "q", function()
-				vim.cmd("close!")
+				pcall(vim.api.nvim_win_close, 0, true)
 				pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
 			end, {
 				buffer = event.buf,

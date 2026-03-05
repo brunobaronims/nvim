@@ -41,7 +41,7 @@ local plugins = {
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "treesitter", version = "main" },
 	{ src = "https://github.com/nvim-mini/mini.pairs", name = "pairs", version = "main" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim", name = "lualine", version = "master" },
-	{ src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = "v1.8.0" },
+    { src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = "v1.9.1" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag", name = "nvim-ts-autotag", version = "main" },
 	{ src = "https://github.com/stevearc/conform.nvim", name = "conform", version = "master" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim", name = "gitsigns", version = "main" },
@@ -189,7 +189,7 @@ if not snacks.did_setup then
 	})
 end
 require("nvim-treesitter").setup({
-	install_dir = vim.fn.stdpath("data") .. "/parser",
+	install_dir = vim.fn.stdpath("data") .. "/site",
 })
 require("nvim-treesitter").install({
 	"c",
@@ -260,11 +260,18 @@ vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
 			diagnostics = { globals = { "vim" } },
-			workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+			workspace = {
+				checkThirdParty = false,
+				library = {
+					vim.env.VIMRUNTIME,
+					vim.fn.stdpath("config") .. "/lua",
+				},
+			},
+			telemetry = { enable = false },
 		},
 	},
 })
-vim.cmd("colorscheme kanagawa-dragon")
+vim.cmd.colorscheme("kanagawa-dragon")
 
 do
 	local colors = require("kanagawa.colors").setup()
